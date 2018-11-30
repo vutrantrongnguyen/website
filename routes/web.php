@@ -16,6 +16,10 @@ Route::get('/', function (){
     return redirect('/newspapers');
 });
 Route::auth();
+Route::get('/newspapers/test',function (){
+    return view('layouts.app');
+});
+
 Route::get('/newspapers/create', 'NewspaperController@create');
 Route::post('/newspapers', 'NewspaperController@store');
 Route::get('/newspapers','NewspaperController@all');

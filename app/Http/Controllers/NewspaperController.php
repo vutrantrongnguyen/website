@@ -25,7 +25,6 @@ class NewspaperController extends Controller
     public function all()
     {
         $newspapers = \App\Newspaper::latest()->paginate(6);
-//        $newspapers = \App\Newspaper::latest()->get()->paginate(3);
         return view('welcome', compact('newspapers'));
     }
 
