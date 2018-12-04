@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    <div id="colorlib-main">
+        <div class="colorlib-blog">
+            <div class="container-wrap">
     @foreach($searchNewspaper as $newspaper)
 
         <h1>{!! $newspaper->title !!}</h1>
@@ -26,27 +29,11 @@
                     {{$comment->created_at->diffForHumans()}}
 
                 </article>
+            @endforeach
+        </div>
     @endforeach
-    {{--@if (Route::has('login'))--}}
-    {{--<div class="entity_comments">--}}
-    {{--@auth--}}
-    {{--<div>--}}
-    {{--<form method="post" action="/comments">--}}
-    {{--{{csrf_field() }}--}}
-    {{--<input type="hidden" required value="{{$newspaper->id}}" name="newspaper_id">--}}
-    {{--<div class="form-group">--}}
-    {{--<textarea name="comment" placeholder=":))" required class="form-control"></textarea>--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-    {{--<button class="btn btn-dark" type="submit">nhập comment</button>--}}
-    {{--</div>--}}
-    {{--</form>--}}
-    {{--</div>--}}
-    {{--@else--}}
-    {{--<p>Đăng nhập để viết ý kiến của bạn</p>--}}
-    {{--@endauth--}}
-    {{--</div>--}}
-    {{--@endif--}}
-    {{--</div>--}}
-    @endforeach
+            </div>
+        </div>
+    </div>
+
 @endsection

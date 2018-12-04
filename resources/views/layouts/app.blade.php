@@ -1,104 +1,132 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Viethistory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
 
-    <title>Vũ Trần Trọng Nguyên</title>
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
 
-    <!-- Scripts -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
 
-    @yield('css')
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
 
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/css/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="/css/css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/css/css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="/css/css/flexslider.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="/css/css/magnific-popup.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="/css/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/css/owl.theme.default.min.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/css/css/style.css">
+
+    <!-- Modernizr JS -->
+    <script src="/js/js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="/js/js/respond.min.js"></script>
+    <![endif]-->
 
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+<body>
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+        <h1 id="colorlib-logo"><a href="/">Viethist</a></h1>
+        <nav id="colorlib-main-menu" role="navigation">
+            <ul>
+                <li class="colorlib-active"><a href="/">Home</a></li>
+                @if (Route::has('login'))
+                    @auth
+                        <li class="colorlib-active" href="#">{{ Auth::user()->name }}</li>
+                        <a href="{{ url('/newspapers/create') }}">CREATE</a>
+                        <li>
 
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Vũ Trần Trọng Nguyên') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto"></ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                        <li class="colorlib-active" ><a href="{{ route('login') }}">Login</a></li>
+                        <li class="colorlib-active" ><a href="{{ route('register') }}">Register</a></li>
+                    @endauth
+                @endif
+            </ul>
+        </nav>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+        <div class="colorlib-footer">
+            <p>
+                <small>&copy;
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    This website made by Nguyên Vũ
+                </small>
+            </p>
+            <h6>{{date(" l. ")}} {{date("d.F.Y")}}  </h6>
+            {{--<ul>--}}
+            {{--<li><a href="#"><i class="icon-facebook2"></i></a></li>--}}
+            {{--<li><a href="#"><i class="icon-twitter2"></i></a></li>--}}
+            {{--<li><a href="#"><i class="icon-instagram"></i></a></li>--}}
+            {{--<li><a href="#"><i class="icon-linkedin2"></i></a></li>--}}
+            {{--</ul>--}}
         </div>
-    </nav>
 
-    <div class="container">
-        @yield('content')
-    </div>
+    </aside>
+    @yield('content')
+
 </div>
+@yield('subcontent')
+<!-- jQuery -->
+<script src="/js/js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="/js/js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="/js/js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="/js/js/jquery.waypoints.min.js"></script>
+<!-- Flexslider -->
+<script src="/js/js/jquery.flexslider-min.js"></script>
+<!-- Magnific Popup -->
+<script src="/js/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/js/magnific-popup-options.js"></script>
+<!-- Owl Carousel -->
+<script src="/js/js/owl.carousel.min.js"></script>
+<!-- Sticky Kit -->
+<script src="/js/js/sticky-kit.min.js"></script>
 
 
-<!-- Footer -->
-<footer class="text-center">
-    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a><br><br>
-    {{--<p>Bootstrap Theme Made By <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a></p>--}}
-</footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-@yield('script')
-
+<!-- MAIN JS -->
+<script src="/js/js/main.js"></script>
 
 </body>
 </html>
+

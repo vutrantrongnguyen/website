@@ -7,7 +7,12 @@
     </style>
 @endsection
 @section('content')
+    <div id="colorlib-main">
+        <div class="colorlib-blog">
+            <div class="container-wrap">
     @if (Route::has('login'))
+        <div class ="row">
+            <div class="col-md-9">
         <div class="entity_comments">
             @auth
                 <form action="/newspapers" method="post">
@@ -42,6 +47,11 @@
                 <p>Bạn chưa đăng nhập</p>
             @endauth
         </div>
+            </div>
+        </div>
     @endif
+            </div>
+        </div>
+    </div>
 
 @endsection
